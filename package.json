@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "nodemon": "^2.0.22",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.3"
+  },
+  "name": "node-ts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:trongthienpc/node-ts.git",
+  "author": "thientt <pcking60@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon"
+  }
+}
