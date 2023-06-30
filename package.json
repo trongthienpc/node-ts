@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "jest": "^29.5.0",
+    "jest-junit": "^16.0.0",
     "nodemon": "^2.0.22",
     "rimraf": "^5.0.1",
     "ts-node": "^10.9.1",
