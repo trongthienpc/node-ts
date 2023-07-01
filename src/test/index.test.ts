@@ -10,9 +10,9 @@ import { message } from "../index";
 
 describe("Testing TypeScript code", () => {
   test("Console log message", () => {
-    expect(message).toBe("Hello, TypeScript!"); // Ensure the message is correct
+    expect(message).toBe("Hello world!"); // Ensure the message is correct
     expect(consoleOutput.length).toBe(1); // Ensure console.log was called once
-    expect(consoleOutput[0]).toBe("Hello, TypeScript!"); // Ensure console.log captured the expected output
+    expect(consoleOutput[0]).toBe("Hello world!"); // Ensure console.log captured the expected output
   });
 });
 
