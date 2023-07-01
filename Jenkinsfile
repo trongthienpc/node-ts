@@ -12,7 +12,7 @@ pipeline {
           // Merge 'develop' into 'main'
                 script {
                     try {
-                        sh 'git merge main'
+                        sh 'git merge origin/main'
                     } catch (err) {
                         // Merge conflict occurred
                         echo "Merge conflict detected! Please resolve the conflicts and try again."
