@@ -8,8 +8,18 @@ pipeline {
           // Checkout main branch
           checkout([$class: 'GitSCM', branches: [[name: '*/main']]])
 
-          // Merge develop branch into main branch
-          sh 'git merge origin/develop'
+
+          // Merge 'develop' into 'main'
+                script {
+                    try {
+                        sh 'git merge main'
+                    } catch (err) {
+                        // Merge conflict occurred
+                        echo "Merge conflict detected! Please resolve the conflicts and try again."
+                        currentBuild.result = 'FAILURE'
+                        error("Merge conflict detected")
+                    }
+                }
 
           // Run tests
           sh 'npm install' // Install dependencies
