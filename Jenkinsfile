@@ -12,7 +12,7 @@ pipeline {
           // Merge 'develop' into 'main'
                 script {
                     try {
-                        sh 'git merge origin/develop'
+                        bat 'git merge origin/develop'
                     } catch (err) {
                         // Merge conflict occurred
                         echo "Merge conflict detected! Please resolve the conflicts and try again."
@@ -30,8 +30,11 @@ pipeline {
                 }
 
           // Run tests
-          sh 'npm install' // Install dependencies
-          sh 'npm test' // Run tests
+          bat 'npm install' // Install dependencies
+          bat 'npm test' // Run tests
+          bat 'npm build' // 
+          bat 'npm start'
+
         }
       }
     }
