@@ -35,15 +35,21 @@ pipeline {
     }
 
     stage('Install dependencies'){
-      bat 'npm ci'
+      script {
+        bat 'npm ci'
+      }
     }
 
     stage('Building app ...'){
-      bat 'npm start'
+      script {
+        bat 'npm start'
+      }
     }
 
     stage('Test case'){
-      bat 'npm test'
+      script {
+        bat 'npm test'
+      }
     }
 
     stage("Email notification") {
