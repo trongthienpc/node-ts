@@ -22,8 +22,7 @@ pipeline {
                       emailext (
                         subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!',
                         body: 
-                          '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS: 
-                            Merge conflict occurred Check console output at $BUILD_URL to view the results.',
+                          '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS: \n Merge conflict occurred Check console output at $BUILD_URL to view the results.',
                         to: 'testnet102@gmail.com',
                       )
 
