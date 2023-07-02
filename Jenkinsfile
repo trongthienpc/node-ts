@@ -21,22 +21,38 @@ pipeline {
                         // Send email notification
                         error("Merge conflict detected")
                     }
-                    emailext (
-                      subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!',
-                      body: 
-                        '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS: Check console output at $BUILD_URL to view the results.',
-                      to: 'testnet102@gmail.com',
-                    )
+                    
 
                 }
 
           // Run tests
-          bat 'npm ci' // Install dependencies
-          bat 'npm test' // Run tests
-          bat 'npm start'
+          bat 'yarn ci' // Install dependencies
+          bat 'yarn test' // Run tests
+          bat 'yarn start'
 
         }
       }
+    }
+
+    stage('Install dependencies'){
+      bat 'npm ci'
+    }
+
+    stage('Building app ...'){
+      bat 'npm start'
+    }
+
+    stage('Test case'){
+      bat 'npm test'
+    }
+
+    stage("Email notification") {
+      emailext (
+        subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!',
+        body: 
+          '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS: Check console output at $BUILD_URL to view the results.',
+        to: 'testnet102@gmail.com',
+      )
     }
   }
 }
