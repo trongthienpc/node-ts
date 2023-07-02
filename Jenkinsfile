@@ -27,8 +27,6 @@ pipeline {
                         to: 'testnet102@gmail.com',
                       )
 
-                      
-
                         error("Merge conflict detected")
                     }
                 }
@@ -36,7 +34,7 @@ pipeline {
           // Run tests
           bat 'npm install' // Install dependencies
           bat 'npm test' // Run tests
-          bat 'npm build' // 
+          bat 'npm build' 
           bat 'npm start'
 
         }
