@@ -19,11 +19,7 @@ pipeline {
                         currentBuild.result = 'FAILURE'
 
                       // Send email notification
-                      emailext (
-                        subject: 'Merge conflict detected!',
-                        body: 'Please resolve the conflicts and try again',
-                        to: 'thientt.bdst@gmail.com',
-                      )
+                        emailext body: 'merge conflict', subject: 'merge conflict', to: 'testnet102@gmail.com'
 
                         error("Merge conflict detected")
                     }
