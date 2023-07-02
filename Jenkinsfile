@@ -24,14 +24,14 @@ pipeline {
                     emailext (
                       subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!',
                       body: 
-                        '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS: \n Merge conflict occurred Check console output at $BUILD_URL to view the results.',
+                        '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS: Check console output at $BUILD_URL to view the results.',
                       to: 'testnet102@gmail.com',
                     )
 
                 }
 
           // Run tests
-          bat 'npm install' // Install dependencies
+          bat 'npm ci' // Install dependencies
           bat 'npm test' // Run tests
           bat 'npm start'
 
