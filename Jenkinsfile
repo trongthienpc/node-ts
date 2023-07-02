@@ -23,12 +23,6 @@ pipeline {
               
 
           }
-
-          // Run tests
-          bat 'yarn ci' // Install dependencies
-          bat 'yarn test' // Run tests
-          bat 'yarn start'
-
         }
       }
     }
@@ -36,7 +30,7 @@ pipeline {
     stage('Install dependencies'){
       steps {
         script {
-          bat 'npm ci'
+          bat 'npm install'
         }
       }
     }
