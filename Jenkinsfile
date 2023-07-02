@@ -18,16 +18,16 @@ pipeline {
                         echo "Merge conflict detected! Please resolve the conflicts and try again."
                         currentBuild.result = 'FAILURE'
 
-                      // Send email notification
-                      emailext (
-                        subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!',
-                        body: 
-                          '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS: \n Merge conflict occurred Check console output at $BUILD_URL to view the results.',
-                        to: 'testnet102@gmail.com',
-                      )
-
+                        // Send email notification
                         error("Merge conflict detected")
                     }
+                    emailext (
+                      subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!',
+                      body: 
+                        '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS: \n Merge conflict occurred Check console output at $BUILD_URL to view the results.',
+                      to: 'testnet102@gmail.com',
+                    )
+
                 }
 
           // Run tests
