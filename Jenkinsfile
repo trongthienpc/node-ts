@@ -33,7 +33,6 @@ pipeline {
           // Run tests
           bat 'npm install' // Install dependencies
           bat 'npm test' // Run tests
-          bat 'npm build' 
           bat 'npm start'
 
         }
