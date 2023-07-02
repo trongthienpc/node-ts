@@ -22,7 +22,7 @@ pipeline {
                       emailext (
                         subject: 'Merge conflict detected!',
                         body: 'Please resolve the conflicts and try again',
-                        to: 'testnet102@gmail.com',
+                        to: 'thientt.bdst@gmail.com',
                       )
 
                         error("Merge conflict detected")
