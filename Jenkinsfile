@@ -24,7 +24,7 @@ pipeline {
                         body: 
                           '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS: 
                             Merge conflict occurred Check console output at $BUILD_URL to view the results.',
-                        to: 'thientt.bdst@gmail.com',
+                        to: 'testnet102@gmail.com',
                       )
 
                       
