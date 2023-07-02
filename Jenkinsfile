@@ -17,6 +17,14 @@ pipeline {
                         // Merge conflict occurred
                         echo "Merge conflict detected! Please resolve the conflicts and try again."
                         currentBuild.result = 'FAILURE'
+
+                      // Send email notification
+                      emailext (
+                        subject: 'Merge conflict detected!',
+                        body: 'Please resolve the conflicts and try again',
+                        to: 'testnet102@gmail.com',
+                      )
+
                         error("Merge conflict detected")
                     }
                 }
