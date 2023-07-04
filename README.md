@@ -3,3 +3,5 @@
 # First checkout and merge branch
 
 # Update readme file
+
+# Update ignore file
