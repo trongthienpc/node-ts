@@ -1,8 +1,5 @@
 pipeline {
-  agent {
-    // Use a pre-configured Jenkins agent with Node.js and SonarQube installed
-    label 'nodejs-sonarqube'
-  }
+  agent any
 
   stages {
     stage('Merge and Test') {
