@@ -15,6 +15,10 @@
   "repository": "git@github.com:trongthienpc/node-ts.git",
   "author": "thientt <pcking60@gmail.com>",
   "license": "MIT",
+  "sonar": {
+    "projectKey": "my-node-app",
+    "projectName": "My Node.js App"
+  },
   "scripts": {
     "dev": "nodemon",
     "build": "rimraf ./dist && tsc",
