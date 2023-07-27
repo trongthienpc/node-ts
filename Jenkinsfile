@@ -54,16 +54,17 @@ pipeline {
     stage('Scan with SonarQube') {
       steps {
           script {
-              // Use SonarQube Scanner for Jenkins plugin to run the scan
-              withSonarQubeEnv('sonarqube-10.1') {
-                  // Set SonarQube project properties
-                  def sonarProjectKey = "my-node-app" // Replace with your SonarQube project key
-                  def sonarProjectName = "My Node.js App" // Replace with your SonarQube project name
-                  def sonarSources = "." // Replace with the path to your Node.js application source code
-                  
-                  // Run the SonarQube scan
-                  sh "sonar-scanner -Dsonar.projectKey=${sonarProjectKey} -Dsonar.projectName=${sonarProjectName} -Dsonar.sources=${sonarSources}"
-              }
+                // Use SonarQube Scanner for Jenkins plugin to run the scan
+            withSonarQubeEnv('sonarqube-10.1') {
+                // Set SonarQube project properties
+                def scannerHome = tool 'sonar-scanner'
+                def sonarProjectKey = "my-node-app" // Replace with your SonarQube project key
+                def sonarProjectName = "My Node.js App" // Replace with your SonarQube project name
+                def sonarSources = "." // Replace with the path to your Node.js application source code
+                
+                // Run the SonarQube scan using the SonarScanner
+                sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=${sonarProjectKey} -Dsonar.projectName=${sonarProjectName} -Dsonar.sources=${sonarSources}"
+            }
           }
       }
     }
