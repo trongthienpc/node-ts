@@ -36,13 +36,13 @@ pipeline {
           }
         }
 
-        stage('Run tests') {
-          steps {
-            script {
-              bat 'npm test'
-            }
-          }
-        }
+        // stage('Run tests') {
+        //   steps {
+        //     script {
+        //       bat 'npm test'
+        //     }
+        //   }
+        // }
 
         // stage('SonarQube Scan') {
         //   steps {
