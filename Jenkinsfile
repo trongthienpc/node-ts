@@ -1,41 +1,35 @@
 pipeline {
-  agent any
+  agent {
+    // Use a pre-configured Jenkins agent with Node.js and SonarQube installed
+    label 'nodejs-sonarqube'
+  }
 
   stages {
     stage('Merge and Test') {
       steps {
+        // Merge 'develop' into 'main' - No changes needed
         script {
-          // Checkout main branch
-          checkout([$class: 'GitSCM', branches: [[name: '*/main']]])
-
-          // Merge 'develop' into 'main'
-          script {
-              try {
-                  bat 'git merge origin/develop'
-              } catch (err) {
-                  // Merge conflict occurred
-                  echo "Merge conflict detected! Please resolve the conflicts and try again."
-                  currentBuild.result = 'FAILURE'
-
-                  // Send email notification
-                  error("Merge conflict detected")
-              }
-              
-
+          try {
+            bat 'git merge origin/develop'
+          } catch (err) {
+            echo "Merge conflict detected! Please resolve the conflicts and try again."
+            currentBuild.result = 'FAILURE'
+            error("Merge conflict detected")
           }
         }
       }
     }
 
-    stage('Install dependencies'){
+    stage('Install dependencies') {
       steps {
+        // Use 'npm ci' for faster and deterministic dependency installation
         script {
-          bat 'npm install'
+          bat 'npm ci'
         }
       }
     }
 
-    stage('Building app ...'){
+    stage('Building app ...') {
       steps {
         script {
           bat 'npm start'
@@ -43,7 +37,7 @@ pipeline {
       }
     }
 
-    stage('Test case'){
+    stage('Test case') {
       steps {
         script {
           bat 'npm test'
@@ -53,13 +47,22 @@ pipeline {
 
     stage('Scan with SonarQube') {
       steps {
-          nodejs(nodeJSInstallationName: "nodejs") {
-            bat "npm install"
-            withSonarQubeEnv("sonarqube-10.1") {
-              bat "npm install sonarqube-scanner"
-              bat "npm run sonar"
+        script {
+          // Use 'npm ci' instead of 'npm install' inside the SonarQube scan step
+          bat 'npm ci'
+        }
+        // The SonarQube analysis can be parallelized with other tasks
+        parallel {
+          stage('SonarQube Scan') {
+            steps {
+              withSonarQubeEnv("sonarqube-10.1") {
+                // No need to install 'sonarqube-scanner', it's already available
+                bat "npm run sonar"
+              }
             }
           }
+          // Add any other tasks that can run concurrently here
+        }
       }
     }
 
@@ -67,8 +70,7 @@ pipeline {
       steps {
         emailext (
           subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!',
-          body: 
-            '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS: Check console output at $BUILD_URL to view the results.',
+          body: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS: Check console output at $BUILD_URL to view the results.',
           to: 'testnet102@gmail.com',
         )
       }
