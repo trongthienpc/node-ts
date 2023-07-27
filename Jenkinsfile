@@ -26,13 +26,14 @@ pipeline {
     //   }
     // }
 
-    // stage('Build app') {
-    //   steps {
-    //     script {
-    //       bat 'npm start'
-    //     }  
-    //   }
-    // }
+    stage('Build app') {
+      steps {
+        script {
+          bat 'npm install'
+          bat 'npm start'
+        }  
+      }
+    }
 
     // stage('Run tests') {
     //   steps {
