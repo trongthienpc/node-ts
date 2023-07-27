@@ -20,48 +20,44 @@ pipeline {
       }
     }
 
-    stage('Install dependencies') {
-      steps {
-        // Use 'npm ci' for faster and deterministic dependency installation
-        script {
-          bat 'npm ci'
-        }
-      }
-    }
-
-    stage('Building app ...') {
-      steps {
-        script {
-          bat 'npm start'
-        }  
-      }
-    }
-
-    stage('Test case') {
-      steps {
-        script {
-          bat 'npm test'
-        }
-      }
-    }
-
-    stage('Scan with SonarQube') {
-      steps {
-        script {
-          // Use 'npm ci' instead of 'npm install' inside the SonarQube scan step
-          bat 'npm ci'
-        }
-        // The SonarQube analysis can be parallelized with other tasks
-        parallel {
-          stage('SonarQube Scan') {
-            steps {
-              withSonarQubeEnv("sonarqube-10.1") {
-                // No need to install 'sonarqube-scanner', it's already available
-                bat "npm run sonar"
-              }
+    stage('Build, Test, and Scan') {
+      parallel {
+        stage('Install dependencies') {
+          steps {
+            // Use 'npm ci' for faster and deterministic dependency installation
+            script {
+              bat 'npm ci'
             }
           }
-          // Add any other tasks that can run concurrently here
+        }
+
+        stage('Build app') {
+          steps {
+            script {
+              bat 'npm start'
+            }  
+          }
+        }
+
+        stage('Run tests') {
+          steps {
+            script {
+              bat 'npm test'
+            }
+          }
+        }
+
+        stage('SonarQube Scan') {
+          steps {
+            script {
+              // Use 'npm ci' instead of 'npm install' inside the SonarQube scan step
+              bat 'npm ci'
+            }
+            // Run SonarQube analysis after all previous tasks are completed
+            withSonarQubeEnv("sonarqube-10.1") {
+              bat "npm run sonar"
+            }
+          }
         }
       }
     }
