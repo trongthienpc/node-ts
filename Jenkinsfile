@@ -18,7 +18,6 @@ pipeline {
     }
 
     stage('Build, Test, and Scan') {
-      
         stage('Install dependencies') {
           steps {
             // Use 'npm ci' for faster and deterministic dependency installation
@@ -44,18 +43,18 @@ pipeline {
         //   }
         // }
 
-        // stage('SonarQube Scan') {
-        //   steps {
-        //     script {
-        //       // Use 'npm ci' instead of 'npm install' inside the SonarQube scan step
-        //       bat 'npm install'
-        //     }
-        //     // Run SonarQube analysis after all previous tasks are completed
-        //     withSonarQubeEnv("sonarqube-10.1") {
-        //       bat "npm run sonar"
-        //     }
-        //   }
-        // }
+        stage('SonarQube Scan') {
+          steps {
+            script {
+              // Use 'npm ci' instead of 'npm install' inside the SonarQube scan step
+              bat 'npm install'
+            }
+            // Run SonarQube analysis after all previous tasks are completed
+            withSonarQubeEnv("sonarqube-10.1") {
+              bat "npm run sonar"
+            }
+          }
+        }
     }
 
     // stage("Package with Docker") {
