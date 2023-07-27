@@ -1,26 +1,13 @@
 {
-  "dependencies": {
-    "@types/jest": "^29.5.2",
-    "jest": "^29.5.0",
-    "jest-junit": "^16.0.0",
-    "nodemon": "^2.0.22",
-    "rimraf": "^5.0.1",
-    "ts-jest": "^29.1.1",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.1.3"
-  },
   "name": "node-ts",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "git@github.com:trongthienpc/node-ts.git",
   "author": "thientt <pcking60@gmail.com>",
   "license": "MIT",
-  "sonar": {
-    "projectKey": "my-node-app",
-    "projectName": "My Node.js App"
-  },
   "scripts": {
     "dev": "nodemon",
+    "sonar": "sonar-scanner",
     "build": "rimraf ./dist && tsc",
     "start": "npm run build && node dist/index.js",
     "test": "jest",
@@ -28,5 +15,16 @@
   },
   "jest": {
     "preset": "ts-jest"
+  },
+  "dependencies": {
+    "@types/jest": "^29.5.2",
+    "jest": "^29.5.0",
+    "jest-junit": "^16.0.0",
+    "nodemon": "^2.0.22",
+    "rimraf": "^5.0.1",
+    "sonarqube-scanner": "^3.0.1",
+    "ts-jest": "^29.1.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.3"
   }
 }
