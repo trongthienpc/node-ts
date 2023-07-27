@@ -17,44 +17,42 @@ pipeline {
       }
     }
 
-    stage('Build, Test, and Scan') {
-        stage('Install dependencies') {
-          steps {
-            // Use 'npm ci' for faster and deterministic dependency installation
-            script {
-              bat 'npm install'
-            }
-          }
+    stage('Install dependencies') {
+      steps {
+        // Use 'npm ci' for faster and deterministic dependency installation
+        script {
+          bat 'npm install'
         }
+      }
+    }
 
-        stage('Build app') {
-          steps {
-            script {
-              bat 'npm start'
-            }  
-          }
+    stage('Build app') {
+      steps {
+        script {
+          bat 'npm start'
+        }  
+      }
+    }
+
+    // stage('Run tests') {
+    //   steps {
+    //     script {
+    //       bat 'npm test'
+    //     }
+    //   }
+    // }
+
+    stage('SonarQube Scan') {
+      steps {
+        script {
+          // Use 'npm ci' instead of 'npm install' inside the SonarQube scan step
+          bat 'npm install'
         }
-
-        // stage('Run tests') {
-        //   steps {
-        //     script {
-        //       bat 'npm test'
-        //     }
-        //   }
-        // }
-
-        stage('SonarQube Scan') {
-          steps {
-            script {
-              // Use 'npm ci' instead of 'npm install' inside the SonarQube scan step
-              bat 'npm install'
-            }
-            // Run SonarQube analysis after all previous tasks are completed
-            withSonarQubeEnv("sonarqube-10.1") {
-              bat "npm run sonar"
-            }
-          }
+        // Run SonarQube analysis after all previous tasks are completed
+        withSonarQubeEnv("sonarqube-10.1") {
+          bat "npm run sonar"
         }
+      }
     }
 
     // stage("Package with Docker") {
