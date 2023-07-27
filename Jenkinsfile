@@ -23,7 +23,7 @@ pipeline {
           steps {
             // Use 'npm ci' for faster and deterministic dependency installation
             script {
-              bat 'npm install'
+              bat 'npm install --ignore-scripts'
             }
           }
         }
@@ -48,7 +48,7 @@ pipeline {
           steps {
             script {
               // Use 'npm ci' instead of 'npm install' inside the SonarQube scan step
-              bat 'npm install'
+              bat 'npm install --ignore-scripts'
             }
             // Run SonarQube analysis after all previous tasks are completed
             withSonarQubeEnv("sonarqube-10.1") {
