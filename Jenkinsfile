@@ -53,7 +53,7 @@ pipeline {
 
     stage('Scan with SonarQube') {
       steps {
-          nodejs(nodeJSInstallattionName: "nodejs") {
+          nodejs(nodeJSInstallationName: "nodejs") {
             bat "npm install"
             withSonarQubeEnv("sonarqube-10.1") {
               bat "npm install sonarqube-scanner"
