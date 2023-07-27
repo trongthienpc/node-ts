@@ -63,7 +63,10 @@ pipeline {
                 def sonarSources = "." // Replace with the path to your Node.js application source code
                 
                 // Run the SonarQube scan using the SonarScanner
-                sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=${sonarProjectKey} -Dsonar.projectName=${sonarProjectName} -Dsonar.sources=${sonarSources} -Dsonar.nodejs.executable=node"
+                bat """
+                    PATH=\$PATH:\$NODEJS_HOME/bin
+                    ${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=${sonarProjectKey} -Dsonar.projectName=${sonarProjectName} -Dsonar.sources=${sonarSources}
+                """
             }
         }
       }
