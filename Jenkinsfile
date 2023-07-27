@@ -18,7 +18,7 @@ pipeline {
     }
 
     stage('Build, Test, and Scan') {
-      parallel {
+      
         stage('Install dependencies') {
           steps {
             // Use 'npm ci' for faster and deterministic dependency installation
@@ -56,7 +56,6 @@ pipeline {
         //     }
         //   }
         // }
-      }
     }
 
     // stage("Package with Docker") {
