@@ -23,7 +23,7 @@ pipeline {
           steps {
             // Use 'npm ci' for faster and deterministic dependency installation
             script {
-              bat 'npm ci'
+              bat 'npm install'
             }
           }
         }
