@@ -56,6 +56,22 @@ pipeline {
             }
           }
         }
+
+        stage("Package with Docker") {
+          steps {
+            script {
+              bat 'docker build -t node-ts .'
+            }
+          }
+        }
+
+        stage("Deploy to QA") {
+          steps {
+            script {
+              bat 'docker-compose -f docker-compose-qa.yml up -d'
+            }
+          }
+        }
       }
     }
 

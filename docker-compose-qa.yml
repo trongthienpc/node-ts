@@ -1,0 +1,11 @@
+version: "3"
+services:
+  # Node.js application service
+  node_app:
+    image: node-ts:latest # Replace with the name of your Docker image from the "Package with Docker" stage
+    ports:
+      - "5001:5001" # Expose the Node.js app on port 5001 (adjust as per your app's port)
+    environment:
+      - NODE_ENV=qa # Set the NODE_ENV to "qa" to indicate it's the QA environment
+    # Add any other environment variables or configurations needed for your QA environment
+    # e.g., database connection strings, API keys, etc.
