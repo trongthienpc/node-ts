@@ -17,22 +17,22 @@ pipeline {
       }
     }
 
-    stage('Install dependencies') {
-      steps {
-        // Use 'npm ci' for faster and deterministic dependency installation
-        script {
-          bat 'npm install'
-        }
-      }
-    }
+    // stage('Install dependencies') {
+    //   steps {
+    //     // Use 'npm ci' for faster and deterministic dependency installation
+    //     script {
+    //       bat 'npm install'
+    //     }
+    //   }
+    // }
 
-    stage('Build app') {
-      steps {
-        script {
-          bat 'npm start'
-        }  
-      }
-    }
+    // stage('Build app') {
+    //   steps {
+    //     script {
+    //       bat 'npm start'
+    //     }  
+    //   }
+    // }
 
     // stage('Run tests') {
     //   steps {
