@@ -59,31 +59,31 @@ pipeline {
       }
     }
 
-    stage("Package with Docker") {
-      steps {
-        script {
-          bat 'docker build -t node-ts .'
-        }
-      }
-    }
+    // stage("Package with Docker") {
+    //   steps {
+    //     script {
+    //       bat 'docker build -t node-ts .'
+    //     }
+    //   }
+    // }
 
-    stage("Deploy to QA") {
-      steps {
-        script {
-          bat 'docker-compose -f docker-compose-qa.yml up -d'
-        }
-      }
-    }
+    // stage("Deploy to QA") {
+    //   steps {
+    //     script {
+    //       bat 'docker-compose -f docker-compose-qa.yml up -d'
+    //     }
+    //   }
+    // }
 
 
-    stage("Email notification") {
-      steps {
-        emailext (
-          subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!',
-          body: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS: Check console output at $BUILD_URL to view the results.',
-          to: 'testnet102@gmail.com',
-        )
-      }
-    }
+    // stage("Email notification") {
+    //   steps {
+    //     emailext (
+    //       subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!',
+    //       body: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS: Check console output at $BUILD_URL to view the results.',
+    //       to: 'testnet102@gmail.com',
+    //     )
+    //   }
+    // }
   }
 }
